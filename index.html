@@ -32,6 +32,7 @@
         .section {
             margin: 20px auto;
             max-width: 600px;
+            position: relative;
         }
         .section img {
             width: 100%;
@@ -80,6 +81,30 @@
             box-shadow: none;
             background: none;
         }
+
+        /* Botões do carrossel */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #ffe500;
+            border: none;
+            font-size: 24px;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 10;
+        }
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .carousel-prev {
+            left: 10px;
+        }
+        .carousel-next {
+            right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +121,9 @@
 
 <!-- Seção 2 - Serviços de SEO com carrossel -->
 <div class="section">
+    <button class="carousel-button carousel-prev" onclick="prevImage('seo')">&#10094;</button>
     <img id="carousel-seo" src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO">
+    <button class="carousel-button carousel-next" onclick="nextImage('seo')">&#10095;</button>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20otimiza%C3%A7%C3%A3o%20de%20an%C3%BAncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
 </div>
 
@@ -108,7 +135,9 @@
 
 <!-- Seção 4 - Criação de Identidade Visual com carrossel -->
 <div class="section">
+    <button class="carousel-button carousel-prev" onclick="prevImage('identidade')">&#10094;</button>
     <img id="carousel-identidade" src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual">
+    <button class="carousel-button carousel-next" onclick="nextImage('identidade')">&#10095;</button>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20cria%C3%A7%C3%A3o%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
 </div>
 
@@ -132,29 +161,48 @@
 
 <!-- Carrossel Script -->
 <script>
-    // Carrossel da seção SEO
+    // Arrays de imagens
     const carouselSeoImages = [
         'imgs/servicos-de-seo-guaratiba-rj.png',
         'imgs/como-aparecer-no-google.png',
-        'imgs/servicos-de-marketing-guaratiba-rj.png' // você pode trocar depois
+        'imgs/servicos-de-marketing-guaratiba-rj.png'
     ];
-    let seoIndex = 0;
-    setInterval(() => {
-        seoIndex = (seoIndex + 1) % carouselSeoImages.length;
-        document.getElementById('carousel-seo').src = carouselSeoImages[seoIndex];
-    }, 3000); // muda a cada 3 segundos
-
-    // Carrossel da seção Identidade Visual
     const carouselIdentidadeImages = [
         'imgs/servico-de-criacao-logo-identidade-visual.png',
         'imgs/servicos-de-marketing-guaratiba-rj.png',
-        'imgs/como-expandir-vender-online.png' // você pode trocar depois
+        'imgs/como-expandir-vender-online.png'
     ];
+
+    // Índices atuais
+    let seoIndex = 0;
     let identidadeIndex = 0;
+
+    // Função automática de troca de imagens
     setInterval(() => {
-        identidadeIndex = (identidadeIndex + 1) % carouselIdentidadeImages.length;
-        document.getElementById('carousel-identidade').src = carouselIdentidadeImages[identidadeIndex];
-    }, 3000); // muda a cada 3 segundos
+        nextImage('seo');
+        nextImage('identidade');
+    }, 3000);
+
+    // Funções para botões
+    function nextImage(section) {
+        if (section === 'seo') {
+            seoIndex = (seoIndex + 1) % carouselSeoImages.length;
+            document.getElementById('carousel-seo').src = carouselSeoImages[seoIndex];
+        } else if (section === 'identidade') {
+            identidadeIndex = (identidadeIndex + 1) % carouselIdentidadeImages.length;
+            document.getElementById('carousel-identidade').src = carouselIdentidadeImages[identidadeIndex];
+        }
+    }
+
+    function prevImage(section) {
+        if (section === 'seo') {
+            seoIndex = (seoIndex - 1 + carouselSeoImages.length) % carouselSeoImages.length;
+            document.getElementById('carousel-seo').src = carouselSeoImages[seoIndex];
+        } else if (section === 'identidade') {
+            identidadeIndex = (identidadeIndex - 1 + carouselIdentidadeImages.length) % carouselIdentidadeImages.length;
+            document.getElementById('carousel-identidade').src = carouselIdentidadeImages[identidadeIndex];
+        }
+    }
 </script>
 
 </body>
