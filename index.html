@@ -232,43 +232,147 @@
             dot.setAttribute("aria-label", `Imagem ${idx + 1} de ${images.length}`);
             dot.addEventListener("click", () => {
                 changeImage(containerId, idx);
+                resetAutoSlide(containerId);
             });
-            dot.addEventListener("keydown", (e) => {
-                if(e.key === "Enter" || e.key === " ") {
+            dot.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     changeImage(containerId, idx);
+                    resetAutoSlide(containerId);
                 }
             });
             indicatorsContainer.appendChild(dot);
         });
-        // Set first active
-        indicatorsContainer.children[0].classList.add("active");
     }
 
-    function changeImage(containerId, idx) {
-        let imgElement, indicatorsContainer, images;
-        if(containerId === "indicators-seo") {
-            imgElement = document.getElementById("carousel-seo");
-            indicatorsContainer = document.getElementById("indicators-seo");
-            images = seoImages;
-        } else if(containerId === "indicators-identidade") {
-            imgElement = document.getElementById("carousel-identidade");
-            indicatorsContainer = document.getElementById("indicators-identidade");
-            images = identidadeImages;
+    // Controladores do carrossel
+    const carousels = {
+        "carousel-seo": {
+            images: seoImages,
+            currentIndex: 0,
+            timer: null,
+            containerId: "carousel-container-seo",
+            indicatorsId: "indicators-seo"
+        },
+        "carousel-identidade": {
+            images: identidadeImages,
+            currentIndex: 0,
+            timer: null,
+            containerId: "carousel-container-identidade",
+            indicatorsId: "indicators-identidade"
         }
-        if(!imgElement || !indicatorsContainer) return;
-        imgElement.src = images[idx];
-        // Atualiza indicadores
-        for(let i = 0; i < indicatorsContainer.children.length; i++) {
-            indicatorsContainer.children[i].classList.toggle("active", i === idx);
-            indicatorsContainer.children[i].setAttribute("aria-selected", i === idx ? "true" : "false");
+    };
+
+    function changeImage(carouselId, index) {
+        const carousel = carousels[carouselId];
+        if (!carousel) return;
+        carousel.currentIndex = index;
+        const imgElement = document.getElementById(carouselId);
+        imgElement.style.opacity = "0";
+        setTimeout(() => {
+            imgElement.src = carousel.images[index];
+            imgElement.style.opacity = "1";
+        }, 250);
+        updateIndicators(carousel.indicatorsId, index);
+    }
+
+    function updateIndicators(indicatorsId, activeIndex) {
+        const indicatorsContainer = document.getElementById(indicatorsId);
+        if (!indicatorsContainer) return;
+        Array.from(indicatorsContainer.children).forEach((dot, idx) => {
+            if (idx === activeIndex) {
+                dot.classList.add("active");
+                dot.setAttribute("aria-selected", "true");
+                dot.setAttribute("tabindex", "0");
+            } else {
+                dot.classList.remove("active");
+                dot.setAttribute("aria-selected", "false");
+                dot.setAttribute("tabindex", "-1");
+            }
+        });
+    }
+
+    function nextImage(carouselId) {
+        const carousel = carousels[carouselId];
+        if (!carousel) return;
+        let nextIndex = carousel.currentIndex + 1;
+        if (nextIndex >= carousel.images.length) nextIndex = 0;
+        changeImage(carouselId, nextIndex);
+    }
+
+    function startAutoSlide(carouselId) {
+        const carousel = carousels[carouselId];
+        if (!carousel) return;
+        if (carousel.timer) clearInterval(carousel.timer);
+        carousel.timer = setInterval(() => {
+            nextImage(carouselId);
+        }, 6000);
+    }
+
+    function resetAutoSlide(containerId) {
+        // Reinicia o timer para o carrossel correto
+        if (containerId === "carousel-container-seo") {
+            startAutoSlide("carousel-seo");
+        } else if (containerId === "carousel-container-identidade") {
+            startAutoSlide("carousel-identidade");
         }
     }
 
-    // Inicializa carrosséis
-    createIndicators("indicators-seo", seoImages);
-    createIndicators("indicators-identidade", identidadeImages);
+    // Swipe / Touch support
+    function addSwipeSupport(containerId, carouselId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        let startX = 0;
+        let isMoving = false;
 
+        container.addEventListener("touchstart", (e) => {
+            if (e.touches.length === 1) {
+                startX = e.touches[0].clientX;
+                isMoving = true;
+            }
+        });
+
+        container.addEventListener("touchmove", (e) => {
+            if (!isMoving) return;
+            let currentX = e.touches[0].clientX;
+            let diffX = currentX - startX;
+
+            // Detect swipe left or right with threshold
+            if (Math.abs(diffX) > 40) {
+                if (diffX > 0) {
+                    // Swipe right (previous)
+                    const carousel = carousels[carouselId];
+                    let prevIndex = carousel.currentIndex - 1;
+                    if (prevIndex < 0) prevIndex = carousel.images.length - 1;
+                    changeImage(carouselId, prevIndex);
+                } else {
+                    // Swipe left (next)
+                    nextImage(carouselId);
+                }
+                resetAutoSlide(containerId);
+                isMoving = false;
+            }
+        });
+
+        container.addEventListener("touchend", () => {
+            isMoving = false;
+        });
+    }
+
+    // Inicializa carrossel
+    window.addEventListener("DOMContentLoaded", () => {
+        // SEO Carrossel
+        createIndicators("indicators-seo", seoImages);
+        changeImage("carousel-seo", 0);
+        startAutoSlide("carousel-seo");
+        addSwipeSupport("carousel-container-seo", "carousel-seo");
+
+        // Identidade Visual Carrossel
+        createIndicators("indicators-identidade", identidadeImages);
+        changeImage("carousel-identidade", 0);
+        startAutoSlide("carousel-identidade");
+        addSwipeSupport("carousel-container-identidade", "carousel-identidade");
+    });
 </script>
 
 </body>
