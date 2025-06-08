@@ -81,41 +81,18 @@
             background: none;
         }
 
-        /* Botões do carrossel */
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.3);
-            color: #ffe500;
-            border: none;
-            font-size: 16px;
-            padding: 6px 8px;
-            cursor: pointer;
-            border-radius: 50%;
-            z-index: 10;
-            transition: background-color 0.3s ease;
-        }
-        .carousel-button:hover {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        .carousel-prev {
-            left: -20px;
-        }
-        .carousel-next {
-            right: -20px;
-        }
-
-        /* Indicadores do carrossel (bolinhas) */
-        .carousel-indicators {
-            text-align: center;
+        /* Indicadores do carrossel (bolinhas + setas pequenas ao lado) */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             margin-top: 10px;
         }
         .carousel-indicators span {
             display: inline-block;
             width: 8px;
             height: 8px;
-            margin: 0 4px;
             background-color: #ccc;
             border-radius: 50%;
             cursor: pointer;
@@ -123,6 +100,19 @@
         }
         .carousel-indicators .active {
             background-color: #ffe500;
+        }
+        .carousel-small-button {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #ffe500;
+            border: none;
+            font-size: 14px;
+            padding: 4px 6px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-small-button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         /* Container para o carrossel */
@@ -147,9 +137,11 @@
 <div class="section">
     <div class="carousel-container">
         <img src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO" id="carousel-seo">
-        <button class="carousel-button carousel-prev" onclick="prevImage('seo')">&#10094;</button>
-        <button class="carousel-button carousel-next" onclick="nextImage('seo')">&#10095;</button>
-        <div class="carousel-indicators" id="indicators-seo"></div>
+        <div class="carousel-controls">
+            <button class="carousel-small-button" onclick="prevImage('seo')">&#10094;</button>
+            <div class="carousel-indicators" id="indicators-seo"></div>
+            <button class="carousel-small-button" onclick="nextImage('seo')">&#10095;</button>
+        </div>
     </div>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20otimização%20de%20anúncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
 </div>
@@ -164,9 +156,11 @@
 <div class="section">
     <div class="carousel-container">
         <img src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual" id="carousel-identidade">
-        <button class="carousel-button carousel-prev" onclick="prevImage('identidade')">&#10094;</button>
-        <button class="carousel-button carousel-next" onclick="nextImage('identidade')">&#10095;</button>
-        <div class="carousel-indicators" id="indicators-identidade"></div>
+        <div class="carousel-controls">
+            <button class="carousel-small-button" onclick="prevImage('identidade')">&#10094;</button>
+            <div class="carousel-indicators" id="indicators-identidade"></div>
+            <button class="carousel-small-button" onclick="nextImage('identidade')">&#10095;</button>
+        </div>
     </div>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20criação%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
 </div>
@@ -211,6 +205,16 @@
         for (let i = 0; i < total; i++) {
             const span = document.createElement('span');
             if (i === index) span.classList.add('active');
+            span.addEventListener('click', () => {
+                if (section === 'seo') {
+                    seoIndex = i;
+                    fadeToImage('carousel-seo', carouselSeoImages[seoIndex]);
+                } else if (section === 'identidade') {
+                    identidadeIndex = i;
+                    fadeToImage('carousel-identidade', carouselIdentidadeImages[identidadeIndex]);
+                }
+                updateIndicators(section, i, total);
+            });
             indicators.appendChild(span);
         }
     }
