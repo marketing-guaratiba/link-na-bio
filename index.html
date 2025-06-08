@@ -60,8 +60,7 @@
             width: 100%;
             height: auto;
             border-radius: 0;
-            transition: opacity 0.5s ease;
-            /* loading é atributo HTML, não CSS - removido daqui */
+            transition: opacity 0.3s ease;
         }
         .section h2 {
             font-size: 20px;
@@ -127,6 +126,7 @@
             position: relative;
             overflow: hidden;
             user-select: none;
+            outline: none;
         }
         .carousel-indicators {
             text-align: center;
@@ -196,132 +196,135 @@
     <img src="imgs/como-expandir-vender-online.png" alt="Parceria Estratégica de Marketing em Guaratiba RJ" loading="lazy" />
     <h2>Parceria Estratégica</h2>
     <p>Descubra como uma parceria estratégica com nosso time pode impulsionar suas vendas online e sua presença digital.</p>
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20como%20uma%20parceria%20certa%20pode%20alavancar%20minhas%20vendas%20online." target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp para parceria">Chama no WhatsApp</a>
+    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20como%20uma%20parceria%20certa%20pode%20alavancar%20minhas%20vendas%20online." target="_blank" rel="noopener noreferrer" aria-label="Quero parceria para vendas online via WhatsApp">Quero Parceria</a>
+</div>
+
+<!-- Botão fixo WhatsApp -->
+<div class="whatsapp-float">
+    <a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" aria-label="Contato WhatsApp Marketing Guaratiba RJ">
+        <img src="imgs/whatsapp.png" alt="WhatsApp" loading="lazy" />
+    </a>
 </div>
 
 <footer>
-    © 2025 Marketing Guaratiba RJ - Todos os direitos reservados.<br />
-    <a href="https://marketing-digital-guaratiba-rj.blogspot.com/" target="_blank" rel="noopener noreferrer">Nosso Blog</a>
+    Marketing Guaratiba RJ — SEO, Google Meu Negócio e Identidade Visual — Guaratiba RJ © 2025
+    <br />
+    <a href="https://marketing-guaratiba.github.io/link-na-bio/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site oficial Marketing Guaratiba RJ">marketing-guaratiba.github.io</a>
 </footer>
 
-<!-- Botão Flutuante WhatsApp -->
-<a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações." 
-   class="whatsapp-float" 
-   target="_blank" 
-   rel="noopener noreferrer"
-   aria-label="Conversar no WhatsApp">
-    <img src="imgs/whatsapp-icon.png" alt="WhatsApp" />
-</a>
-
 <script>
-    function addSwipe(elementId, imageArray, imageElementId, indicatorsId) {
-        let index = 0;
-        let startX = 0;
-        let isDown = false;
+(() => {
+    // Carrosséis de imagens para SEO e Identidade Visual
+    const carousels = [
+        {
+            containerId: 'carousel-container-seo',
+            imgId: 'carousel-seo',
+            indicatorsId: 'indicators-seo',
+            images: [
+                'imgs/servicos-de-seo-guaratiba-rj.png',
+                'imgs/seo-resultados-guaratiba-rj.png',
+                'imgs/otimizacao-anuncios-guaratiba.png'
+            ],
+            alts: [
+                'Serviços de SEO em Guaratiba RJ',
+                'Resultados de SEO em Guaratiba RJ',
+                'Otimização de Anúncios em Guaratiba RJ'
+            ]
+        },
+        {
+            containerId: 'carousel-container-identidade',
+            imgId: 'carousel-identidade',
+            indicatorsId: 'indicators-identidade',
+            images: [
+                'imgs/servico-de-criacao-logo-identidade-visual.png',
+                'imgs/criacao-de-logo-guaratiba.png',
+                'imgs/design-identidade-visual-guaratiba.png'
+            ],
+            alts: [
+                'Criação de Identidade Visual em Guaratiba RJ',
+                'Criação de Logo em Guaratiba RJ',
+                'Design de Identidade Visual em Guaratiba RJ'
+            ]
+        }
+    ];
 
-        const imageElement = document.getElementById(imageElementId);
-        const container = document.getElementById(elementId);
-        const indicators = document.getElementById(indicatorsId);
+    carousels.forEach(({ containerId, imgId, indicatorsId, images, alts }) => {
+        const container = document.getElementById(containerId);
+        const imgElement = document.getElementById(imgId);
+        const indicatorsContainer = document.getElementById(indicatorsId);
+        if (!container || !imgElement || !indicatorsContainer) return;
 
-        function updateIndicators() {
-            indicators.innerHTML = '';
-            imageArray.forEach((_, i) => {
-                const span = document.createElement('span');
-                if (i === index) {
-                    span.classList.add('active');
-                    span.setAttribute('aria-selected', 'true');
-                    span.setAttribute('tabindex', '0');
-                } else {
-                    span.setAttribute('aria-selected', 'false');
-                    span.setAttribute('tabindex', '-1');
-                }
-                span.setAttribute('role', 'tab');
-                span.addEventListener('click', () => {
-                    index = i;
-                    fadeToImage(imageElementId, imageArray[index]);
-                    updateIndicators();
-                });
-                span.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        index = i;
-                        fadeToImage(imageElementId, imageArray[index]);
-                        updateIndicators();
-                    }
-                });
-                indicators.appendChild(span);
+        let currentIndex = 0;
+
+        // Cria indicadores
+        images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.setAttribute('role', 'tab');
+            dot.setAttribute('tabindex', '0');
+            dot.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+            dot.setAttribute('aria-label', `Imagem ${index + 1} de ${images.length}`);
+            dot.className = index === 0 ? 'active' : '';
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
             });
-        }
-
-        function fadeToImage(id, src) {
-            const img = document.getElementById(id);
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = src;
-                img.style.opacity = 1;
-            }, 300);
-        }
-
-        container.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDown = true;
+            dot.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    currentIndex = index;
+                    updateCarousel();
+                }
+            });
+            indicatorsContainer.appendChild(dot);
         });
 
-        container.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const moveX = e.touches[0].clientX;
-            const diffX = moveX - startX;
+        const indicators = indicatorsContainer.children;
+
+        function updateCarousel() {
+            imgElement.style.opacity = '0';
+            setTimeout(() => {
+                imgElement.src = images[currentIndex];
+                imgElement.alt = alts[currentIndex];
+                imgElement.style.opacity = '1';
+
+                for (let i = 0; i < indicators.length; i++) {
+                    indicators[i].classList.toggle('active', i === currentIndex);
+                    indicators[i].setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+                }
+            }, 250);
+        }
+
+        // Navegação com teclado
+        container.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateCarousel();
+            } else if (e.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateCarousel();
+            }
+        });
+
+        // Swipe touch (básico)
+        let startX = 0;
+        container.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        });
+
+        container.addEventListener('touchend', e => {
+            let endX = e.changedTouches[0].clientX;
+            let diffX = startX - endX;
             if (Math.abs(diffX) > 40) {
                 if (diffX > 0) {
-                    index = (index - 1 + imageArray.length) % imageArray.length;
+                    currentIndex = (currentIndex + 1) % images.length;
                 } else {
-                    index = (index + 1) % imageArray.length;
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
                 }
-                fadeToImage(imageElementId, imageArray[index]);
-                updateIndicators();
-                isDown = false;
+                updateCarousel();
             }
         });
-
-        container.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        // Keyboard navigation
-        container.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                index = (index - 1 + imageArray.length) % imageArray.length;
-                fadeToImage(imageElementId, imageArray[index]);
-                updateIndicators();
-                e.preventDefault();
-            }
-            if (e.key === 'ArrowRight') {
-                index = (index + 1) % imageArray.length;
-                fadeToImage(imageElementId, imageArray[index]);
-                updateIndicators();
-                e.preventDefault();
-            }
-        });
-
-        updateIndicators();
-    }
-
-    // Imagens para carrossel SEO
-    const seoImages = [
-        'imgs/servicos-de-seo-guaratiba-rj.png',
-        'imgs/seo-exemplo2.png',
-        'imgs/seo-exemplo3.png'
-    ];
-
-    // Imagens para carrossel Identidade Visual
-    const identidadeImages = [
-        'imgs/servico-de-criacao-logo-identidade-visual.png',
-        'imgs/identidade-visual-exemplo2.png',
-        'imgs/identidade-visual-exemplo3.png'
-    ];
-
-    addSwipe('carousel-container-seo', seoImages, 'carousel-seo', 'indicators-seo');
-    addSwipe('carousel-container-identidade', identidadeImages, 'carousel-identidade', 'indicators-identidade');
+    });
+})();
 </script>
 
 </body>
