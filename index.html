@@ -32,16 +32,13 @@
         .section {
             margin: 20px auto;
             max-width: 600px;
-            position: relative;
         }
         .section img {
             width: 100%;
-            height: auto;
-            max-height: 450px;
-            object-fit: contain;
-            border-radius: 0px;
+            max-height: 700px;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
             opacity: 1;
-            transition: opacity 1s ease-in-out;
         }
         .button {
             display: inline-block;
@@ -89,23 +86,24 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.3);
             color: #ffe500;
             border: none;
-            font-size: 24px;
-            padding: 8px 12px;
+            font-size: 16px;
+            padding: 6px 8px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 50%;
             z-index: 10;
+            transition: background-color 0.3s ease;
         }
         .carousel-button:hover {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.5);
         }
         .carousel-prev {
-            left: 10px;
+            left: -20px;
         }
         .carousel-next {
-            right: 10px;
+            right: -20px;
         }
 
         /* Indicadores do carrossel (bolinhas) */
@@ -115,15 +113,21 @@
         }
         .carousel-indicators span {
             display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin: 0 5px;
+            width: 8px;
+            height: 8px;
+            margin: 0 4px;
             background-color: #ccc;
             border-radius: 50%;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .carousel-indicators .active {
             background-color: #ffe500;
+        }
+
+        /* Container para o carrossel */
+        .carousel-container {
+            position: relative;
         }
     </style>
 </head>
@@ -136,37 +140,41 @@
 <!-- Seção 1 - Topo com logo -->
 <div class="section">
     <img src="imgs/servicos-de-marketing-guaratiba-rj.png" alt="Topo com Logo">
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os.">Fale Conosco</a>
+    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20seus%20serviços.">Fale Conosco</a>
 </div>
 
 <!-- Seção 2 - Serviços de SEO com carrossel -->
 <div class="section">
-    <button class="carousel-button carousel-prev" onclick="prevImage('seo')">&#10094;</button>
-    <img id="carousel-seo" src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO">
-    <button class="carousel-button carousel-next" onclick="nextImage('seo')">&#10095;</button>
-    <div class="carousel-indicators" id="seo-indicators"></div>
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20otimiza%C3%A7%C3%A3o%20de%20an%C3%BAncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
+    <div class="carousel-container">
+        <img src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO" id="carousel-seo">
+        <button class="carousel-button carousel-prev" onclick="prevImage('seo')">&#10094;</button>
+        <button class="carousel-button carousel-next" onclick="nextImage('seo')">&#10095;</button>
+        <div class="carousel-indicators" id="indicators-seo"></div>
+    </div>
+    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20otimização%20de%20anúncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
 </div>
 
 <!-- Seção 3 - Google Meu Negócio -->
 <div class="section">
     <img src="imgs/como-aparecer-no-google.png" alt="Google Meu Negócio">
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20colocar%20minha%20empresa%20no%20Google%20Meu%20Neg%C3%B3cio.">Quero Aparecer no Google</a>
+    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20colocar%20minha%20empresa%20no%20Google%20Meu%20Negócio.">Quero Aparecer no Google</a>
 </div>
 
 <!-- Seção 4 - Criação de Identidade Visual com carrossel -->
 <div class="section">
-    <button class="carousel-button carousel-prev" onclick="prevImage('identidade')">&#10094;</button>
-    <img id="carousel-identidade" src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual">
-    <button class="carousel-button carousel-next" onclick="nextImage('identidade')">&#10095;</button>
-    <div class="carousel-indicators" id="identidade-indicators"></div>
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20cria%C3%A7%C3%A3o%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
+    <div class="carousel-container">
+        <img src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual" id="carousel-identidade">
+        <button class="carousel-button carousel-prev" onclick="prevImage('identidade')">&#10094;</button>
+        <button class="carousel-button carousel-next" onclick="nextImage('identidade')">&#10095;</button>
+        <div class="carousel-indicators" id="indicators-identidade"></div>
+    </div>
+    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20criação%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
 </div>
 
 <!-- Seção 5 - A Parceria Certa -->
 <div class="section">
     <img src="imgs/como-expandir-vender-online.png" alt="A Parceria Certa">
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20como%20uma%20parceria%20certa%20pode%20alavancar%20minhas%20vendas%20online.">Chama no WhatsApp</a>
+    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20como%20uma%20parceria%20certa%20pode%20alavancar%20minhas%20vendas%20online.">Chama no WhatsApp</a>
 </div>
 
 <footer>
@@ -181,30 +189,29 @@
     <img src="imgs/whatsapp-icon.png" alt="WhatsApp" />
 </a>
 
-<!-- Carrossel Script -->
 <script>
-    // Arrays de imagens
     const carouselSeoImages = [
         'imgs/servicos-de-seo-guaratiba-rj.png',
         'imgs/como-aparecer-no-google.png',
         'imgs/servicos-de-marketing-guaratiba-rj.png'
     ];
+
     const carouselIdentidadeImages = [
         'imgs/servico-de-criacao-logo-identidade-visual.png',
-        'imgs/servicos-de-marketing-guaratiba-rj.png',
-        'imgs/como-expandir-vender-online.png'
+        'imgs/como-expandir-vender-online.png',
+        'imgs/servicos-de-marketing-guaratiba-rj.png'
     ];
 
     let seoIndex = 0;
     let identidadeIndex = 0;
 
     function updateIndicators(section, index, total) {
-        const indicators = document.getElementById(section + '-indicators');
+        const indicators = document.getElementById(`indicators-${section}`);
         indicators.innerHTML = '';
         for (let i = 0; i < total; i++) {
-            const dot = document.createElement('span');
-            dot.className = i === index ? 'active' : '';
-            indicators.appendChild(dot);
+            const span = document.createElement('span');
+            if (i === index) span.classList.add('active');
+            indicators.appendChild(span);
         }
     }
 
@@ -232,24 +239,18 @@
         }
     }
 
-    function fadeToImage(elementId, newSrc) {
-        const img = document.getElementById(elementId);
+    function fadeToImage(imgId, newSrc) {
+        const img = document.getElementById(imgId);
         img.style.opacity = 0;
         setTimeout(() => {
             img.src = newSrc;
             img.style.opacity = 1;
-        }, 500);
+        }, 300);
     }
 
-    // Atualiza os indicadores no carregamento inicial
+    // Inicializar indicadores
     updateIndicators('seo', seoIndex, carouselSeoImages.length);
     updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
-
-    // Carrossel automático
-    setInterval(() => {
-        nextImage('seo');
-        nextImage('identidade');
-    }, 3000);
 </script>
 
 </body>
