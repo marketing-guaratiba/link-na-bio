@@ -40,6 +40,8 @@
             max-height: 450px;
             object-fit: contain;
             border-radius: 0px;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
         }
         .button {
             display: inline-block;
@@ -105,6 +107,24 @@
         .carousel-next {
             right: 10px;
         }
+
+        /* Indicadores do carrossel (bolinhas) */
+        .carousel-indicators {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .carousel-indicators span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .carousel-indicators .active {
+            background-color: #ffe500;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +144,7 @@
     <button class="carousel-button carousel-prev" onclick="prevImage('seo')">&#10094;</button>
     <img id="carousel-seo" src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO">
     <button class="carousel-button carousel-next" onclick="nextImage('seo')">&#10095;</button>
+    <div class="carousel-indicators" id="seo-indicators"></div>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20otimiza%C3%A7%C3%A3o%20de%20an%C3%BAncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
 </div>
 
@@ -138,6 +159,7 @@
     <button class="carousel-button carousel-prev" onclick="prevImage('identidade')">&#10094;</button>
     <img id="carousel-identidade" src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual">
     <button class="carousel-button carousel-next" onclick="nextImage('identidade')">&#10095;</button>
+    <div class="carousel-indicators" id="identidade-indicators"></div>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20cria%C3%A7%C3%A3o%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
 </div>
 
@@ -173,36 +195,61 @@
         'imgs/como-expandir-vender-online.png'
     ];
 
-    // Índices atuais
     let seoIndex = 0;
     let identidadeIndex = 0;
 
-    // Função automática de troca de imagens
-    setInterval(() => {
-        nextImage('seo');
-        nextImage('identidade');
-    }, 3000);
+    function updateIndicators(section, index, total) {
+        const indicators = document.getElementById(section + '-indicators');
+        indicators.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('span');
+            dot.className = i === index ? 'active' : '';
+            indicators.appendChild(dot);
+        }
+    }
 
-    // Funções para botões
     function nextImage(section) {
         if (section === 'seo') {
             seoIndex = (seoIndex + 1) % carouselSeoImages.length;
-            document.getElementById('carousel-seo').src = carouselSeoImages[seoIndex];
+            fadeToImage('carousel-seo', carouselSeoImages[seoIndex]);
+            updateIndicators('seo', seoIndex, carouselSeoImages.length);
         } else if (section === 'identidade') {
             identidadeIndex = (identidadeIndex + 1) % carouselIdentidadeImages.length;
-            document.getElementById('carousel-identidade').src = carouselIdentidadeImages[identidadeIndex];
+            fadeToImage('carousel-identidade', carouselIdentidadeImages[identidadeIndex]);
+            updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
         }
     }
 
     function prevImage(section) {
         if (section === 'seo') {
             seoIndex = (seoIndex - 1 + carouselSeoImages.length) % carouselSeoImages.length;
-            document.getElementById('carousel-seo').src = carouselSeoImages[seoIndex];
+            fadeToImage('carousel-seo', carouselSeoImages[seoIndex]);
+            updateIndicators('seo', seoIndex, carouselSeoImages.length);
         } else if (section === 'identidade') {
             identidadeIndex = (identidadeIndex - 1 + carouselIdentidadeImages.length) % carouselIdentidadeImages.length;
-            document.getElementById('carousel-identidade').src = carouselIdentidadeImages[identidadeIndex];
+            fadeToImage('carousel-identidade', carouselIdentidadeImages[identidadeIndex]);
+            updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
         }
     }
+
+    function fadeToImage(elementId, newSrc) {
+        const img = document.getElementById(elementId);
+        img.style.opacity = 0;
+        setTimeout(() => {
+            img.src = newSrc;
+            img.style.opacity = 1;
+        }, 500);
+    }
+
+    // Atualiza os indicadores no carregamento inicial
+    updateIndicators('seo', seoIndex, carouselSeoImages.length);
+    updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
+
+    // Carrossel automático
+    setInterval(() => {
+        nextImage('seo');
+        nextImage('identidade');
+    }, 3000);
 </script>
 
 </body>
