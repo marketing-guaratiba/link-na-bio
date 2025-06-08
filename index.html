@@ -81,18 +81,18 @@
             background: none;
         }
 
-        /* Indicadores do carrossel (bolinhas + setas pequenas ao lado) */
-        .carousel-controls {
+        /* Indicadores do carrossel (somente bolinhas pequenas) */
+        .carousel-indicators {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 6px;
+            margin-top: 8px;
         }
         .carousel-indicators span {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background-color: #ccc;
             border-radius: 50%;
             cursor: pointer;
@@ -100,19 +100,6 @@
         }
         .carousel-indicators .active {
             background-color: #ffe500;
-        }
-        .carousel-small-button {
-            background-color: rgba(0, 0, 0, 0.3);
-            color: #ffe500;
-            border: none;
-            font-size: 14px;
-            padding: 4px 6px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
-        .carousel-small-button:hover {
-            background-color: rgba(0, 0, 0, 0.5);
         }
 
         /* Container para o carrossel */
@@ -137,11 +124,7 @@
 <div class="section">
     <div class="carousel-container">
         <img src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO" id="carousel-seo">
-        <div class="carousel-controls">
-            <button class="carousel-small-button" onclick="prevImage('seo')">&#10094;</button>
-            <div class="carousel-indicators" id="indicators-seo"></div>
-            <button class="carousel-small-button" onclick="nextImage('seo')">&#10095;</button>
-        </div>
+        <div class="carousel-indicators" id="indicators-seo"></div>
     </div>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20otimização%20de%20anúncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
 </div>
@@ -156,11 +139,7 @@
 <div class="section">
     <div class="carousel-container">
         <img src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual" id="carousel-identidade">
-        <div class="carousel-controls">
-            <button class="carousel-small-button" onclick="prevImage('identidade')">&#10094;</button>
-            <div class="carousel-indicators" id="indicators-identidade"></div>
-            <button class="carousel-small-button" onclick="nextImage('identidade')">&#10095;</button>
-        </div>
+        <div class="carousel-indicators" id="indicators-identidade"></div>
     </div>
     <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações%20sobre%20criação%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
 </div>
@@ -219,30 +198,6 @@
         }
     }
 
-    function nextImage(section) {
-        if (section === 'seo') {
-            seoIndex = (seoIndex + 1) % carouselSeoImages.length;
-            fadeToImage('carousel-seo', carouselSeoImages[seoIndex]);
-            updateIndicators('seo', seoIndex, carouselSeoImages.length);
-        } else if (section === 'identidade') {
-            identidadeIndex = (identidadeIndex + 1) % carouselIdentidadeImages.length;
-            fadeToImage('carousel-identidade', carouselIdentidadeImages[identidadeIndex]);
-            updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
-        }
-    }
-
-    function prevImage(section) {
-        if (section === 'seo') {
-            seoIndex = (seoIndex - 1 + carouselSeoImages.length) % carouselSeoImages.length;
-            fadeToImage('carousel-seo', carouselSeoImages[seoIndex]);
-            updateIndicators('seo', seoIndex, carouselSeoImages.length);
-        } else if (section === 'identidade') {
-            identidadeIndex = (identidadeIndex - 1 + carouselIdentidadeImages.length) % carouselIdentidadeImages.length;
-            fadeToImage('carousel-identidade', carouselIdentidadeImages[identidadeIndex]);
-            updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
-        }
-    }
-
     function fadeToImage(imgId, newSrc) {
         const img = document.getElementById(imgId);
         img.style.opacity = 0;
@@ -255,6 +210,19 @@
     // Inicializar indicadores
     updateIndicators('seo', seoIndex, carouselSeoImages.length);
     updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
+
+    // Rotação automática opcional (caso queira)
+    setInterval(() => {
+        seoIndex = (seoIndex + 1) % carouselSeoImages.length;
+        fadeToImage('carousel-seo', carouselSeoImages[seoIndex]);
+        updateIndicators('seo', seoIndex, carouselSeoImages.length);
+    }, 5000); // 5 segundos
+
+    setInterval(() => {
+        identidadeIndex = (identidadeIndex + 1) % carouselIdentidadeImages.length;
+        fadeToImage('carousel-identidade', carouselIdentidadeImages[identidadeIndex]);
+        updateIndicators('identidade', identidadeIndex, carouselIdentidadeImages.length);
+    }, 5000); // 5 segundos
 </script>
 
 </body>
