@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="imgs/marketing-digital-servicos.ico" />
+    <link rel="icon" type="image/x-icon" href="imgs/marketing-digital-servicos.ico" />
 
-<!-- Open Graph para compartilhamento -->
-<meta property="og:title" content="Marketing Guaratiba RJ - Link na Bio" />
-<meta property="og:description" content="Conheça nossos serviços de SEO, Google Meu Negócio, Identidade Visual e mais. Fale conosco!" />
-<meta property="og:image" content="https://marketing-guaratiba.github.io/link-na-bio/imgs/servicos-de-marketing-guaratiba-rj.png" />
-<meta property="og:url" content="https://marketing-guaratiba.github.io/link-na-bio/" />
-<meta property="og:type" content="website" />
+    <!-- Open Graph para compartilhamento -->
+    <meta property="og:title" content="Marketing Guaratiba RJ - Link na Bio" />
+    <meta property="og:description" content="Conheça nossos serviços de SEO, Google Meu Negócio, Identidade Visual e mais. Fale conosco!" />
+    <meta property="og:image" content="https://marketing-guaratiba.github.io/link-na-bio/imgs/servicos-de-marketing-guaratiba-rj.png" />
+    <meta property="og:url" content="https://marketing-guaratiba.github.io/link-na-bio/" />
+    <meta property="og:type" content="website" />
 
     <title>Marketing Guaratiba RJ - Link na Bio</title>
     <style>
@@ -61,6 +61,26 @@
             background-color: #f8f8f8;
             padding: 10px;
         }
+
+        /* Botão flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+        .whatsapp-float img {
+            width: 60%;
+            height: 60%;
+            margin-top: 20%;
+        }
     </style>
 </head>
 <body>
@@ -102,6 +122,14 @@
 <footer>
     © 2025 Marketing Guaratiba RJ - Todos os direitos reservados.
 </footer>
+
+<!-- Botão Flutuante WhatsApp -->
+<a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações." 
+   class="whatsapp-float" 
+   target="_blank" 
+   aria-label="Conversar no WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" />
+</a>
 
 </body>
 </html>
