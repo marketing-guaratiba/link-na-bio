@@ -2,11 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="imgs/marketing-digital-servicos.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Description -->
+    <meta name="description" content="Conheça nossos serviços de SEO, Google Meu Negócio, Identidade Visual e mais. Fale conosco!" />
 
-    <!-- Open Graph para compartilhamento -->
+    <!-- Open Graph (para compartilhamento em redes sociais) -->
     <meta property="og:title" content="Marketing Guaratiba RJ - Link na Bio" />
     <meta property="og:description" content="Conheça nossos serviços de SEO, Google Meu Negócio, Identidade Visual e mais. Fale conosco!" />
     <meta property="og:image" content="https://marketing-guaratiba.github.io/link-na-bio/imgs/servicos-de-marketing-guaratiba-rj.png" />
@@ -14,6 +15,7 @@
     <meta property="og:type" content="website" />
 
     <title>Marketing Guaratiba RJ - Link na Bio</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,24 +23,47 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            color: #000000;
         }
+
         header {
             background-color: #000000;
             color: #ffe500;
-            font-size: 24px;
             padding: 20px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
             font-weight: bold;
         }
+
         .section {
             margin: 20px auto;
             max-width: 600px;
+            padding: 10px;
         }
+
         .section img {
             width: 100%;
             height: auto;
-            border-radius: 0px;
-            transition: opacity 0.5s ease;
+            border-radius: 0;
+            margin-bottom: 15px;
         }
+
+        .section h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
         .button {
             display: inline-block;
             width: 80%;
@@ -52,9 +77,11 @@
             text-decoration: none;
             font-weight: bold;
         }
+
         .button:hover {
             background-color: #222222;
         }
+
         footer {
             margin: 40px 0 20px;
             font-size: 14px;
@@ -63,227 +90,70 @@
             padding: 10px;
         }
 
-        /* Botão flutuante do WhatsApp - somente imagem */
+        /* Botão flutuante do WhatsApp */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 100;
         }
+
         .whatsapp-float img {
             width: 60px;
             height: 60px;
-            margin: 0;
-            padding: 0;
-            border: none;
-            box-shadow: none;
-            background: none;
-        }
-
-        /* Carrossel */
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel-indicators {
-            text-align: center;
-            margin-top: 8px;
-        }
-
-        .carousel-indicators span {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            margin: 0 4px;
-            background-color: #999;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .carousel-indicators .active {
-            background-color: #000;
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    Marketing Guaratiba RJ
-</header>
+    <header>
+        <h1>Marketing Guaratiba RJ</h1>
+    </header>
 
-<!-- Seção 1 - Topo com logo -->
-<div class="section">
-    <img src="imgs/servicos-de-marketing-guaratiba-rj.png" alt="Topo com Logo">
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os.">Fale Conosco</a>
-</div>
-
-<!-- Seção 2 - Serviços de SEO com carrossel -->
-<div class="section">
-    <div class="carousel-container" id="carousel-container-seo">
-        <img src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO" id="carousel-seo">
-        <div class="carousel-indicators" id="indicators-seo"></div>
+    <!-- Seção 1 - SEO -->
+    <div class="section">
+        <img src="imgs/servicos-de-seo-guaratiba-rj.png" alt="Serviços de SEO">
+        <h2>Otimização SEO para Alavancar seus Resultados</h2>
+        <p>Melhore o posicionamento da sua empresa nos mecanismos de busca e conquiste mais clientes através de técnicas avançadas de SEO personalizadas para o seu negócio.</p>
+        <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20quero saber mais sobre SEO.">Quero Otimizar Meu Site</a>
     </div>
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20otimiza%C3%A7%C3%A3o%20de%20an%C3%BAncios%20com%20SEO.">Quero Otimizar Meus Anúncios</a>
-</div>
 
-<!-- Seção 3 - Google Meu Negócio -->
-<div class="section">
-    <img src="imgs/como-aparecer-no-google.png" alt="Google Meu Negócio">
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20colocar%20minha%20empresa%20no%20Google%20Meu%20Negócio.">Quero Aparecer no Google</a>
-</div>
-
-<!-- Seção 4 - Criação de Identidade Visual com carrossel -->
-<div class="section">
-    <div class="carousel-container" id="carousel-container-identidade">
-        <img src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual" id="carousel-identidade">
-        <div class="carousel-indicators" id="indicators-identidade"></div>
+    <!-- Seção 2 - Google Meu Negócio -->
+    <div class="section">
+        <img src="imgs/como-aparecer-no-google.png" alt="Google Meu Negócio">
+        <h2>Coloque sua Empresa no Google</h2>
+        <p>Seja facilmente encontrado por seus clientes no Google e Google Maps. Configuramos e otimizamos seu perfil no Google Meu Negócio para atrair mais visitantes e conversões.</p>
+        <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20quero colocar minha empresa no Google.">Quero Aparecer no Google</a>
     </div>
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20cria%C3%A7%C3%A3o%20de%20identidade%20visual.">Quero Minha Identidade Visual</a>
-</div>
 
-<!-- Seção 5 - A Parceria Certa -->
-<div class="section">
-    <img src="imgs/como-expandir-vender-online.png" alt="A Parceria Certa">
-    <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Ol%C3%A1%2C%20Marketing%20Guaratiba%20RJ%2C%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20como%20uma%20parceria%20certa%20pode%20alavancar%20minhas%20vendas%20online.">Chama no WhatsApp</a>
-</div>
+    <!-- Seção 3 - Identidade Visual -->
+    <div class="section">
+        <img src="imgs/servico-de-criacao-logo-identidade-visual.png" alt="Criação de Identidade Visual">
+        <h2>Criação de Identidade Visual Profissional</h2>
+        <p>Valorize sua marca com uma identidade visual única e profissional. Desenvolvemos logos, paletas de cores e elementos gráficos que transmitem confiança e credibilidade.</p>
+        <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20quero criar uma identidade visual para minha empresa.">Quero Minha Identidade Visual</a>
+    </div>
 
-<footer>
-    © 2025 Marketing Guaratiba RJ - Todos os direitos reservados.
-</footer>
+    <!-- Seção 4 - Parceria Certa -->
+    <div class="section">
+        <img src="imgs/como-expandir-vender-online.png" alt="A Parceria Certa para Vender Online">
+        <h2>Transforme sua Presença Digital e Venda Mais</h2>
+        <p>Conte com nossa expertise em marketing digital para expandir sua presença online e alcançar novos mercados. Juntos podemos transformar seus resultados e aumentar suas vendas.</p>
+        <a class="button" href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20quero saber como posso vender mais online.">Quero Vender Mais</a>
+    </div>
 
-<!-- Botão Flutuante WhatsApp -->
-<a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações." 
-   class="whatsapp-float" 
-   target="_blank" 
-   aria-label="Conversar no WhatsApp">
-    <img src="imgs/whatsapp-icon.png" alt="WhatsApp" />
-</a>
+    <footer>
+        © 2025 Marketing Guaratiba RJ - Todos os direitos reservados.
+    </footer>
 
-<script>
-    function addSwipe(elementId, imageArray, imageElementId, indicatorsId) {
-        let index = 0;
-        let startX = 0;
-        let isDown = false;
-
-        const imageElement = document.getElementById(imageElementId);
-        const container = document.getElementById(elementId);
-        const indicators = document.getElementById(indicatorsId);
-
-        function updateIndicators() {
-            indicators.innerHTML = '';
-            imageArray.forEach((_, i) => {
-                const span = document.createElement('span');
-                if (i === index) span.classList.add('active');
-                span.addEventListener('click', () => {
-                    index = i;
-                    fadeToImage(imageElementId, imageArray[index]);
-                    updateIndicators();
-                });
-                indicators.appendChild(span);
-            });
-        }
-
-        function fadeToImage(imgId, newSrc) {
-            const img = document.getElementById(imgId);
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = newSrc;
-                img.style.opacity = 1;
-            }, 300);
-        }
-
-        function nextImage() {
-            index = (index + 1) % imageArray.length;
-            fadeToImage(imageElementId, imageArray[index]);
-            updateIndicators();
-        }
-
-        // Touch events
-        container.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDown = true;
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const diffX = e.touches[0].clientX - startX;
-            if (Math.abs(diffX) > 50) {
-                if (diffX < 0) {
-                    nextImage();
-                } else {
-                    index = (index - 1 + imageArray.length) % imageArray.length;
-                    fadeToImage(imageElementId, imageArray[index]);
-                    updateIndicators();
-                }
-                isDown = false;
-            }
-        });
-
-        container.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        // Mouse events (desktop)
-        container.addEventListener('mousedown', (e) => {
-            startX = e.clientX;
-            isDown = true;
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            const diffX = e.clientX - startX;
-            if (Math.abs(diffX) > 50) {
-                if (diffX < 0) {
-                    nextImage();
-                } else {
-                    index = (index - 1 + imageArray.length) % imageArray.length;
-                    fadeToImage(imageElementId, imageArray[index]);
-                    updateIndicators();
-                }
-                isDown = false;
-            }
-        });
-
-        container.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        // Auto slide
-        setInterval(() => {
-            nextImage();
-        }, 5000);
-
-        // Inicializar indicadores
-        updateIndicators();
-    }
-
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', () => {
-        addSwipe(
-            'carousel-container-seo',
-            [
-                'imgs/servicos-de-seo-guaratiba-rj.png',
-                'imgs/como-aparecer-no-google.png',
-                'imgs/servicos-de-marketing-guaratiba-rj.png'
-            ],
-            'carousel-seo',
-            'indicators-seo'
-        );
-
-        addSwipe(
-            'carousel-container-identidade',
-            [
-                'imgs/servico-de-criacao-logo-identidade-visual.png',
-                'imgs/como-expandir-vender-online.png',
-                'imgs/servicos-de-marketing-guaratiba-rj.png'
-            ],
-            'carousel-identidade',
-            'indicators-identidade'
-        );
-    });
-</script>
+    <!-- Botão Flutuante WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim pelo link na bio e gostaria de mais informações." 
+       class="whatsapp-float" 
+       target="_blank" 
+       aria-label="Conversar no WhatsApp">
+        <img src="imgs/whatsapp-icon.png" alt="WhatsApp" />
+    </a>
 
 </body>
 </html>
