@@ -61,7 +61,6 @@
             height: auto;
             border-radius: 0;
             transition: opacity 0.5s ease;
-            /* loading é atributo HTML, não CSS - removido daqui */
         }
         .section h2 {
             font-size: 20px;
@@ -205,123 +204,71 @@
 </footer>
 
 <!-- Botão Flutuante WhatsApp -->
-<a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio%20e%20gostaria%20de%20mais%20informações." 
-   class="whatsapp-float" 
-   target="_blank" 
-   rel="noopener noreferrer"
-   aria-label="Conversar no WhatsApp">
-    <img src="imgs/whatsapp-icon.png" alt="WhatsApp" />
+<a href="https://api.whatsapp.com/send?phone=5521976998139&text=Olá,%20Marketing%20Guaratiba%20RJ,%20vim%20pelo%20link%20na%20bio." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+    <img src="imgs/whatsapp-icon.png" alt="Ícone WhatsApp" />
 </a>
 
 <script>
-    function addSwipe(elementId, imageArray, imageElementId, indicatorsId) {
-        let index = 0;
-        let startX = 0;
-        let isDown = false;
+    // Imagens para os carrosséis
+    const seoImages = [
+        "imgs/servicos-de-seo-guaratiba-rj.png",
+        "imgs/seo-onpage-guaratiba.png",
+        "imgs/seo-local-guaratiba.png"
+    ];
+    const identidadeImages = [
+        "imgs/servico-de-criacao-logo-identidade-visual.png",
+        "imgs/logo-design-guaratiba.png",
+        "imgs/marca-profissional-guaratiba.png"
+    ];
 
-        const imageElement = document.getElementById(imageElementId);
-        const container = document.getElementById(elementId);
-        const indicators = document.getElementById(indicatorsId);
-
-        function updateIndicators() {
-            indicators.innerHTML = '';
-            imageArray.forEach((_, i) => {
-                const span = document.createElement('span');
-                if (i === index) {
-                    span.classList.add('active');
-                    span.setAttribute('aria-selected', 'true');
-                    span.setAttribute('tabindex', '0');
-                } else {
-                    span.setAttribute('aria-selected', 'false');
-                    span.setAttribute('tabindex', '-1');
-                }
-                span.setAttribute('role', 'tab');
-                span.addEventListener('click', () => {
-                    index = i;
-                    fadeToImage(imageElementId, imageArray[index]);
-                    updateIndicators();
-                });
-                span.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        index = i;
-                        fadeToImage(imageElementId, imageArray[index]);
-                        updateIndicators();
-                    }
-                });
-                indicators.appendChild(span);
+    function createIndicators(containerId, images) {
+        const indicatorsContainer = document.getElementById(containerId);
+        indicatorsContainer.innerHTML = "";
+        images.forEach((_, idx) => {
+            const dot = document.createElement("span");
+            dot.setAttribute("role", "tab");
+            dot.setAttribute("tabindex", "0");
+            dot.setAttribute("aria-selected", idx === 0 ? "true" : "false");
+            dot.setAttribute("aria-label", `Imagem ${idx + 1} de ${images.length}`);
+            dot.addEventListener("click", () => {
+                changeImage(containerId, idx);
             });
-        }
-
-        function fadeToImage(id, src) {
-            const img = document.getElementById(id);
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = src;
-                img.style.opacity = 1;
-            }, 300);
-        }
-
-        container.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDown = true;
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const moveX = e.touches[0].clientX;
-            const diffX = moveX - startX;
-            if (Math.abs(diffX) > 40) {
-                if (diffX > 0) {
-                    index = (index - 1 + imageArray.length) % imageArray.length;
-                } else {
-                    index = (index + 1) % imageArray.length;
+            dot.addEventListener("keydown", (e) => {
+                if(e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    changeImage(containerId, idx);
                 }
-                fadeToImage(imageElementId, imageArray[index]);
-                updateIndicators();
-                isDown = false;
-            }
+            });
+            indicatorsContainer.appendChild(dot);
         });
-
-        container.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        // Keyboard navigation
-        container.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                index = (index - 1 + imageArray.length) % imageArray.length;
-                fadeToImage(imageElementId, imageArray[index]);
-                updateIndicators();
-                e.preventDefault();
-            }
-            if (e.key === 'ArrowRight') {
-                index = (index + 1) % imageArray.length;
-                fadeToImage(imageElementId, imageArray[index]);
-                updateIndicators();
-                e.preventDefault();
-            }
-        });
-
-        updateIndicators();
+        // Set first active
+        indicatorsContainer.children[0].classList.add("active");
     }
 
-    // Imagens para carrossel SEO
-    const seoImages = [
-        'imgs/servicos-de-seo-guaratiba-rj.png',
-        'imgs/seo-exemplo2.png',
-        'imgs/seo-exemplo3.png'
-    ];
+    function changeImage(containerId, idx) {
+        let imgElement, indicatorsContainer, images;
+        if(containerId === "indicators-seo") {
+            imgElement = document.getElementById("carousel-seo");
+            indicatorsContainer = document.getElementById("indicators-seo");
+            images = seoImages;
+        } else if(containerId === "indicators-identidade") {
+            imgElement = document.getElementById("carousel-identidade");
+            indicatorsContainer = document.getElementById("indicators-identidade");
+            images = identidadeImages;
+        }
+        if(!imgElement || !indicatorsContainer) return;
+        imgElement.src = images[idx];
+        // Atualiza indicadores
+        for(let i = 0; i < indicatorsContainer.children.length; i++) {
+            indicatorsContainer.children[i].classList.toggle("active", i === idx);
+            indicatorsContainer.children[i].setAttribute("aria-selected", i === idx ? "true" : "false");
+        }
+    }
 
-    // Imagens para carrossel Identidade Visual
-    const identidadeImages = [
-        'imgs/servico-de-criacao-logo-identidade-visual.png',
-        'imgs/identidade-visual-exemplo2.png',
-        'imgs/identidade-visual-exemplo3.png'
-    ];
+    // Inicializa carrosséis
+    createIndicators("indicators-seo", seoImages);
+    createIndicators("indicators-identidade", identidadeImages);
 
-    addSwipe('carousel-container-seo', seoImages, 'carousel-seo', 'indicators-seo');
-    addSwipe('carousel-container-identidade', identidadeImages, 'carousel-identidade', 'indicators-identidade');
 </script>
 
 </body>
